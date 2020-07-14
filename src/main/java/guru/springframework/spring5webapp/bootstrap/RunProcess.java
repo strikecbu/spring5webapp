@@ -1,9 +1,11 @@
-package guru.springframework.spring5webapp.process;
+package guru.springframework.spring5webapp.bootstrap;
 
 import guru.springframework.spring5webapp.model.Author;
 import guru.springframework.spring5webapp.model.Book;
+import guru.springframework.spring5webapp.model.Publisher;
 import guru.springframework.spring5webapp.repository.AuthorRepository;
 import guru.springframework.spring5webapp.repository.BookRepository;
+import guru.springframework.spring5webapp.repository.PublisherRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -12,10 +14,13 @@ public class RunProcess implements CommandLineRunner {
 
     private AuthorRepository authorRepository;
     private BookRepository bookRepository;
+    private PublisherRepository publisherRepository;
 
-    public RunProcess(AuthorRepository authorRepository, BookRepository bookRepository) {
+    public RunProcess(AuthorRepository authorRepository, BookRepository bookRepository,
+                      PublisherRepository publisherRepository) {
         this.authorRepository = authorRepository;
         this.bookRepository = bookRepository;
+        this.publisherRepository = publisherRepository;
     }
 
     @Override
@@ -43,6 +48,10 @@ public class RunProcess implements CommandLineRunner {
         System.out.println("Book: " + book);
         System.out.println("Book2: " + book2);
 
+        Publisher publisher = new Publisher("BigBooks", "0987978878");
+        publisherRepository.save(publisher);
+
+        System.out.println("Publisher count: " + publisherRepository.count());
 
     }
 }
