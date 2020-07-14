@@ -16,6 +16,10 @@ public class Publisher {
     private String state;
     private String zip;
 
+    @OneToMany
+    @JoinColumn(name = "publisher_id")
+    private Set<Book> books = new HashSet<>();
+
     public Publisher() {
     }
 
@@ -25,6 +29,14 @@ public class Publisher {
         this.city = city;
         this.state = state;
         this.zip = zip;
+    }
+
+    public Set<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(Set<Book> books) {
+        this.books = books;
     }
 
     public Long getId() {
